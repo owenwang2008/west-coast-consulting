@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>精彩图集 | 西岸留学咨询</title>
+  <meta name="description" content="西岸游学往届学员精彩瞬间——校园课堂、惠斯勒探险、寄宿家庭温情、结营典礼……每一张照片都是一个成长故事。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .gallery-filter {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 2px solid var(--cream-dark);
+      background: var(--white);
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: var(--font-zh);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .masonry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 12px;
+    }
+    .masonry-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .masonry-item.wide { grid-column: span 2; }
+    .masonry-item.tall { grid-row: span 2; }
+    .masonry-item.big { grid-column: span 2; grid-row: span 2; }
+    .masonry-thumb {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      transition: transform 0.4s ease;
+    }
+    .masonry-item:hover .masonry-thumb { transform: scale(1.06); }
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+    .masonry-overlay span {
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      background: #1a1a1a;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .lightbox-emoji { font-size: 6rem; margin-bottom: 20px; }
+    .lightbox-title { color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
+    .lightbox-desc { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; }
+    .lightbox-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: #fff; }
+    @media (max-width: 768px) {
+      .masonry-grid { grid-template-columns: repeat(2,1fr); }
+      .masonry-item.big { grid-column: span 2; }
+      .masonry-item.tall { grid-row: span 1; }
+    }
+    @media (max-width: 480px) {
+      .masonry-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html"><span lang="zh">首页</span><span lang="en">Home</span></a><span>›</span><span><span lang="zh">精彩图集</span><span lang="en">Gallery</span></span></div>
+    <h1><span lang="zh">精彩瞬间</span><span lang="en">Captured Moments</span></h1>
+    <p><span lang="zh">每一张照片背后，都是一个孩子成长的故事。</span><span lang="en">Behind every photo is a story of a child growing up.</span></p>
+  </div>
+</section>
+
+<section class="section bg-cream">
+  <div class="container">
+    <!-- Filter Buttons -->
+    <div class="gallery-filter">
+      <button class="filter-btn active" data-filter="all"><span lang="zh">全部</span><span lang="en">All</span></button>
+      <button class="filter-btn" data-filter="school"><span lang="zh">课堂体验</span><span lang="en">Classroom</span></button>
+      <button class="filter-btn" data-filter="trip"><span lang="zh">旅行探险</span><span lang="en">Adventures</span></button>
+      <button class="filter-btn" data-filter="homestay"><span lang="zh">寄宿家庭</span><span lang="en">Homestay</span></button>
+      <button class="filter-btn" data-filter="ceremony"><span lang="zh">典礼活动</span><span lang="en">Ceremonies</span></button>
+    </div>
+
+    <!-- Masonry Gallery -->
+    <div class="masonry-grid">
+      <div class="masonry-item big" data-cat="school" data-title="真实课堂体验" data-en="Real Classroom Experience" data-desc="在温哥华本地学校与加拿大同学并肩上课，感受开放式教育的魅力" data-desc-en="Side by side with Canadian classmates in a Vancouver school, experiencing open-style education">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#1B4332,#2D6A4F)">🏫</div>
+        <div class="masonry-overlay"><span lang="zh">📸 真实课堂体验</span><span lang="en">📸 Real Classroom</span></div>
+      </div>
+      <div class="masonry-item" data-cat="trip" data-title="惠斯勒冬季滑雪" data-en="Whistler Winter Skiing" data-desc="人生第一次滑雪！在北美顶级滑雪场感受速度与激情" data-desc-en="First time skiing! Experiencing the thrill of speed at North America's top ski resort">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#1A3C5E,#2E5E8E)">🎿</div>
+        <div class="masonry-overlay"><span lang="zh">📸 惠斯勒滑雪</span><span lang="en">📸 Whistler Skiing</span></div>
+      </div>
+      <div class="masonry-item" data-cat="homestay" data-title="寄宿家庭晚餐时光" data-en="Homestay Family Dinner" data-desc="每天晚餐是最好的英语沉浸时光，也是温暖的家庭相处时刻" data-desc-en="Dinner every evening — the best English immersion time and warm family bonding moments">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#7D5A00,#F0A500)">🍽️</div>
+        <div class="masonry-overlay"><span lang="zh">📸 家庭晚餐</span><span lang="en">📸 Family Dinner</span></div>
+      </div>
+      <div class="masonry-item wide" data-cat="trip" data-title="UBC校园参观" data-en="UBC Campus Tour" data-desc="走进加拿大顶尖学府UBC，亲身感受世界一流大学的学术氛围" data-desc-en="Walking through Canada's top university UBC, feeling the academic atmosphere of a world-class institution">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#0D2818,#1B4332)">🎓</div>
+        <div class="masonry-overlay"><span lang="zh">📸 UBC校园参观</span><span lang="en">📸 UBC Campus</span></div>
+      </div>
+      <div class="masonry-item tall" data-cat="ceremony" data-title="结营颁奖典礼" data-en="Closing Ceremony" data-desc="每位学员上台分享最难忘的一件事，颁发双语结营证书" data-desc-en="Every student shares their most memorable moment and receives a bilingual completion certificate">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#C0392B,#E74C3C)">🏆</div>
+        <div class="masonry-overlay"><span lang="zh">📸 结营典礼</span><span lang="en">📸 Closing Ceremony</span></div>
+      </div>
+      <div class="masonry-item" data-cat="trip" data-title="卡皮拉诺吊桥探险" data-en="Capilano Bridge Adventure" data-desc="70米高空横跨峡谷的吊桥，是温哥华最令人心跳加速的体验之一" data-desc-en="A bridge spanning 70 meters above a canyon — one of Vancouver's most thrilling experiences">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#4A1942,#8B3FAF)">🌲</div>
+        <div class="masonry-overlay"><span lang="zh">📸 卡皮拉诺吊桥</span><span lang="en">📸 Capilano Bridge</span></div>
+      </div>
+      <div class="masonry-item" data-cat="school" data-title="STEM创新工作坊" data-en="STEM Innovation Workshop" data-desc="与本地同学组队完成STEM挑战，英语沟通，创意无限" data-desc-en="Teaming up with local students for STEM challenges — communicating in English, creativity unlimited">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#0D3B2E,#1B6349)">🔬</div>
+        <div class="masonry-overlay"><span lang="zh">📸 STEM工作坊</span><span lang="en">📸 STEM Workshop</span></div>
+      </div>
+      <div class="masonry-item wide" data-cat="trip" data-title="维多利亚岛布查特花园" data-en="Butchart Gardens, Victoria" data-desc="加拿大最美的私人花园，百年历史，色彩缤纷令人惊叹" data-desc-en="Canada's most beautiful private garden — a century of history and stunning colors">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#7D5A00,#C8993D)">🌺</div>
+        <div class="masonry-overlay"><span lang="zh">📸 布查特花园</span><span lang="en">📸 Butchart Gardens</span></div>
+      </div>
+      <div class="masonry-item" data-cat="homestay" data-title="周末家庭日活动" data-en="Weekend Family Day" data-desc="和寄宿家庭一起逛超市、烹饪、公园——真正融入加拿大家庭生活" data-desc-en="Grocery shopping, cooking, park visits with the host family — truly integrating into Canadian family life">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#1A3C5E,#2E5E8E)">🏡</div>
+        <div class="masonry-overlay"><span lang="zh">📸 家庭日</span><span lang="en">📸 Family Day</span></div>
+      </div>
+      <div class="masonry-item" data-cat="trip" data-title="史丹利公园骑行" data-en="Stanley Park Cycling" data-desc="骑行世界级城市公园史丹利公园，海风、树林、城市天际线一览无余" data-desc-en="Cycling through world-class Stanley Park — sea breeze, forest, and city skyline all in one">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#2D5A27,#4CAF50)">🚴</div>
+        <div class="masonry-overlay"><span lang="zh">📸 史丹利公园</span><span lang="en">📸 Stanley Park</span></div>
+      </div>
+      <div class="masonry-item" data-cat="ceremony" data-title="英语演讲展示" data-en="English Speech Presentation" data-desc="每位学员在结营典礼上用英语分享自己的温哥华故事，勇气和成长并存" data-desc-en="Every student shares their Vancouver story in English at the closing ceremony — courage and growth together">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#C0392B,#922B21)">🎤</div>
+        <div class="masonry-overlay"><span lang="zh">📸 英语演讲</span><span lang="en">📸 English Speech</span></div>
+      </div>
+      <div class="masonry-item wide" data-cat="school" data-title="加拿大课堂小组讨论" data-en="Canadian Classroom Group Discussion" data-desc="加拿大课堂鼓励学生表达自己的想法，小组讨论是常见的教学方式" data-desc-en="Canadian classrooms encourage students to express their ideas — group discussions are a common teaching method">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#1B4332,#52B788)">💬</div>
+        <div class="masonry-overlay"><span lang="zh">📸 小组讨论课</span><span lang="en">📸 Group Discussion</span></div>
+      </div>
+      <div class="masonry-item" data-cat="trip" data-title="格兰维尔岛市场" data-en="Granville Island Market" data-desc="温哥华最有活力的市集，来自世界各地的美食汇聚于此" data-desc-en="Vancouver's most vibrant market, where cuisine from around the world comes together">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#E67E22,#F0A500)">🍜</div>
+        <div class="masonry-overlay"><span lang="zh">📸 格兰维尔岛</span><span lang="en">📸 Granville Island</span></div>
+      </div>
+      <div class="masonry-item" data-cat="ceremony" data-title="中加文化交流研讨会" data-en="China-Canada Cultural Exchange Seminar" data-desc="来自两个文化背景的学生坐在一起，分享彼此的故事和价值观" data-desc-en="Students from two cultures sit together, sharing stories and values with each other">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#6C3483,#A569BD)">🤝</div>
+        <div class="masonry-overlay"><span lang="zh">📸 文化交流</span><span lang="en">📸 Cultural Exchange</span></div>
+      </div>
+      <div class="masonry-item" data-cat="homestay" data-title="寄宿家庭欢迎仪式" data-en="Host Family Welcome" data-desc="第一天抵达寄宿家庭，温暖的欢迎让紧张瞬间消散" data-desc-en="Arriving at the host family on day one — a warm welcome makes nervousness instantly disappear">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#27AE60,#2ECC71)">👨‍👩‍👧</div>
+        <div class="masonry-overlay"><span lang="zh">📸 寄宿家庭欢迎</span><span lang="en">📸 Family Welcome</span></div>
+      </div>
+      <div class="masonry-item" data-cat="trip" data-title="温哥华夜景" data-en="Vancouver Night View" data-desc="温哥华的夜晚同样迷人，Coal Harbour的灯光倒影美如画" data-desc-en="Vancouver nights are equally enchanting — the lights of Coal Harbour reflected in the water like a painting">
+        <div class="masonry-thumb" style="background:linear-gradient(135deg,#0A0A2E,#1A1A5E)">🌃</div>
+        <div class="masonry-overlay"><span lang="zh">📸 温哥华夜景</span><span lang="en">📸 Vancouver Night</span></div>
+      </div>
+    </div>
+
+    <div class="text-center mt-40">
+      <p style="color:var(--gray);margin-bottom:20px"><span lang="zh">📸 更多精彩照片请关注我们的微信公众号和小红书账号</span><span lang="en">📸 Follow our WeChat Official Account and Little Red Book for more photos</span></p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <div style="background:var(--white);border-radius:var(--radius);padding:16px 24px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.5rem">💬</span>
+          <div><strong style="display:block;font-size:0.88rem;color:var(--dark)"><span lang="zh">微信公众号</span><span lang="en">WeChat Official</span></strong><span style="font-size:0.78rem;color:var(--gray)">西岸游学Vancouver</span></div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius);padding:16px 24px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.5rem">📱</span>
+          <div><strong style="display:block;font-size:0.88rem;color:var(--dark)"><span lang="zh">小红书</span><span lang="en">Little Red Book</span></strong><span style="font-size:0.78rem;color:var(--gray)">@西岸留学咨询</span></div>
+        </div>
+        <a href="contact.html" style="background:var(--red);border-radius:var(--radius);padding:16px 24px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none">
+          <span style="font-size:1.5rem">✈️</span>
+          <div><strong style="display:block;font-size:0.88rem"><span lang="zh">我也要去！</span><span lang="en">I want to go!</span></strong><span style="font-size:0.78rem;opacity:0.85"><span lang="zh">立即咨询报名</span><span lang="en">Enquire & Enroll</span></span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <span class="lightbox-close" id="lightboxClose">✕</span>
+    <div class="lightbox-emoji" id="lightboxEmoji">🏫</div>
+    <h3 class="lightbox-title" id="lightboxTitle"></h3>
+    <p class="lightbox-desc" id="lightboxDesc"></p>
+  </div>
+</div>
+
+<section class="contact-strip">
+  <div class="container">
+    <div class="contact-strip-inner">
+      <div>
+        <h2><span lang="zh">让你的孩子也成为照片里的主角</span><span lang="en">Let Your Child Be the Star of the Next Photo</span></h2>
+        <p><span lang="zh">每一张笑脸背后，都是家长和孩子共同的信任与勇气。</span><span lang="en">Behind every smile is the trust and courage of parents and children together.</span></p>
+      </div>
+      <div class="contact-strip-btns">
+        <a href="contact.html" class="btn btn-secondary btn-lg"><span lang="zh">立即报名</span><span lang="en">Enroll Now</span></a>
+        <a href="programs.html" class="btn btn-lg" style="background:#fff;color:var(--red);font-weight:700;border-radius:50px;padding:18px 36px"><span lang="zh">查看项目</span><span lang="en">View Programs</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script>
+// Gallery filter
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.masonry-item').forEach(item => {
+      const show = filter === 'all' || item.dataset.cat === filter;
+      item.style.opacity = show ? '1' : '0.2';
+      item.style.pointerEvents = show ? 'auto' : 'none';
+    });
+  });
+});
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxClose = document.getElementById('lightboxClose');
+const isZh = () => !document.body.classList.contains('lang-en');
+
+document.querySelectorAll('.masonry-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const emoji = item.querySelector('.masonry-thumb').textContent.trim();
+    document.getElementById('lightboxEmoji').textContent = emoji;
+    document.getElementById('lightboxTitle').textContent = isZh() ? item.dataset.title : item.dataset.en;
+    document.getElementById('lightboxDesc').textContent = isZh() ? item.dataset.desc : item.dataset.descEn;
+    lightbox.classList.add('open');
+  });
+});
+
+lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+</script>
+</body>
+</html>
